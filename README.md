@@ -5,157 +5,156 @@
 
 **UniPCB: A Unified Vision-Language Benchmark for Open-Ended PCB Quality Inspection**
 
-首个统一的视觉-语言基准测试，用于开放式印刷电路板（PCB）质量检测。
+The first unified vision-language benchmark for open-ended PCB quality inspection.
 
 ---
 
-## 📖 简介
+## Overview
 
-多模态大语言模型（MLLMs）在通用工业质量检测中展现出潜力，但在复杂场景（如 PCB 检测）中表现不足。PCB 检测由于组件密集、布线结构复杂和缺陷模式细微，需要专门的领域专业知识。
+[UniPCB](https://arxiv.org/abs/2601.19222) introduces a comprehensive benchmark for evaluating multimodal large language models (MLLMs) on printed circuit board (PCB) quality inspection tasks.
 
-**UniPCB** 填补了这一空白，提供：
-- 🎯 首个统一的 PCB 视觉-语言基准测试
-- 📊 三标注场景的系统化数据集
-- 🤖 PCB-GPT：专为 PCB 检测优化的多模态大语言模型
-- 📈 细粒度缺陷定位评估框架
+### Key Features
 
-## 🌟 主要特性
-
-- **统一基准**：标准化来自不同来源的 PCB 检测数据
-- **渐进式课程学习**：三阶段训练策略，模仿人类专家学习过程
-- **多任务评估**：支持缺陷检测、定位、分析等多种任务
-- **强化学习优化**：支持 GRPO/RL 等算法
+- 🎯 **Unified Benchmark**: Standardized evaluation across three annotation scenarios
+- 📊 **23K QA Pairs**: High-quality bilingual dataset
+- 🤖 **PCB-GPT**: Specialized MLLM with three-stage curriculum learning
+- 📈 **Multi-Task**: 14 inspection subtasks (detection, localization, analysis, etc.)
 
 ---
 
-## 📁 项目结构
+## Quick Links
 
-```
-UniPCB/
-├── README.md              # 本文件
-├── LICENSE                # MIT 许可证
-├── CONTRIBUTING.md        # 贡献指南
-├── data/
-│   └── DATASETS.md     # 数据集详细说明
-├── docs/
-│   ├── EXPERIMENTS.md   # 实验结果和表格
-│   └── DATA_FORMAT.md   # 数据格式说明
-└── info/                 # 额外信息目录
-```
-
-**注：** 完整的训练代码和数据将在论文中稿后发布。当前项目提供数据集信息、实验结果和文档说明。
+- 📄 [Paper](https://arxiv.org/abs/2601.19222)
+- 🔬 [Data Statistics](#data-sources)
+- 📊 [Experimental Results](#experimental-results)
+- 📋 [Project Structure](#project-structure)
 
 ---
 
-## 📊 实验结果
+## Data Sources
 
-详见 [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md)，包含：
+### Public Datasets Used in UniPCB
 
-### 总体性能对比
+| Dataset | PCB Type | Modality | Target | #Categories | #Images | Link |
+|---------|---------|----------|---------|-----------|---------|------|
+| [HRIPCB](https://pkusz.edu.cn/) | BPCB | RGB | Defect | 6 | 1386 |
+| [HRIPCB-Augmented](https://github.com/) | BPCB | RGB | Defect | 6 | 10668 |
+| [DeepPCB](https://github.com/DeepPCB) | BPCB | Line-Scan | Defect | 6 | 3000 |
+| [PCB-AoI](https://kaggle.com/PCB-AoI) | PCBA | AOI | Defect | 1 | 1211 |
+| [PCBA-DET](https://github.com/PCBA-DET) | PCBA | Real | Defect | 8 | 4601 |
+| [Solder Joint Dataset](https://github.com/Solder-Joint-Dataset) | PCBA | Real | Defect | 5 | 3390 |
+| [Dataset-PCB](https://github.com/Dataset-PCB) | PCBA | Real | Defect | 2 | 3196 |
+| [DsPCBSD+](https://github.com/DsPCBSD+) | BPCB | AOI | Defect | 9 | 10259 |
+| [PCB-Defect-Detection-Image-Registration](https://github.com/PCB-Defect-Detection-Image-Registration) | BPCB | Line-Scan | Defect | 6 | 20 |
+| [Defects Dataset](https://roboflow.com/datasets/Defects-Dataset) | PCBA | Real | Defect | 5 | 484 |
+| [Mono PCB Dataset](https://roboflow.com/datasets/Mono-PCB-Dataset) | PCBA | RGB | Component | 16 | 248 |
+| [Mixed PCB defect](https://mendeley.com/datasets/Mixed-PCB-defect) | BPCB | RGB | Defect | 6 | 1741 |
+| [Bangla PCB yolo](https://kaggle.com/datasets/Bangla-PCB-yolo) | BPCB | RGB | Defect | 6 | 1196 |
+| [MRC-DETR](https://github.com/MRC-DETR) | BPCB | AOI | Defect | 3 | 800 |
+| [U-PCBD](http://iiplab.net/U-PCPCB) | PCBA | Ultrasonic | Defect | 5 | 4320 |
+| [FICS](https://trust-hub.org/datasets/FICS) | PCBA | RGB | Mix | 31 | 9912 |
+| [VisA (PCB)](https://github.com/VisA-PCB) | PCBA | RGB | Mix | 10 | 4416 |
+| [PCB-Bank](https://github.com/PCB-Bank) | PCBA | RGB | Mix | 11 | 2333 |
+| [PCB-Resistor-Defect-Dataset](https://github.com/PCB-Resistor-Defect-Dataset) | PCBA | RGB | Mix | 11 | 261399 |
+| [PCB Datasets-main](https://github.com/PCB-Datasets-main) | PCBA | AOI | Mix | 8 | 4748 |
+| [PCB AD](https://kaggle.com/PCB-AD) | PCBA | RGB | Mix | 5 | 690 |
+| [Multiple Datasets on PCB Defects](https://kaggle.com/datasets/Multiple-Datasets-on-PCB-Defects) | PCBA | AOI | Mix | 2 | 18493 |
+| [MPI-PCB](https://github.com/MPI-PCB) | PCBA | Real | Mix | 2 | 1797 |
+| [Micro-PCB Images](https://kaggle.com/datasets/Micro-PCB-Images) | PCBA | RGB | Component | 13 | 8125 |
+| [FPIC](https://ece.ufl.edu/~jessurun/FPIC) | PCBA | AOI | Component | 25 | 6260 |
+| [PCB oriented detection](https://kaggle.com/datasets/PCB-oriented-detection) | PCBA | AoI | Component | 41 | 190 |
+| [PCB Component Detection](https://ninja.com/datasets/PCB-Component-Detection) | PCBA | Real | Component | 9 | 1410 |
+| [PCB-Components-1495](https://kaggle.com/datasets/PCB-Components-1495) | PCBA | Real | Component | 28 | 830 |
+| [PCB-Component-Detection-CVM](https://roboflow.com/datasets/PCB-Component-Detection-CVM) | PCBA | RGB | Component | 9 | 101 |
+| [DSLR](https://tuwien.ac.at/DSLR) | PCBA | RGB | Component | 4 | 748 |
+| [PCB-Vision](https://github.com/PCB-Vision) | PCBA | RGB | Component | 4 | 106 |
 
-| 模型类型 | 平均得分 | VQA 得分 |
-|---------|---------|---------|
-| GPT-5-Main | 71.0 | 73.7 |
-| Gemini2.5-Pro | 69.3 | 71.9 |
-| Qwen2.5-VL 7B | 50.4 | 66.7 |
-| Qwen3-VL-Instruct 8B | 66.2 | 64.1 |
-| **PCB-GPT (Ours)** | **69.0** | **67.4** |
-
-### 关键发现
-
-- ✅ PCB-GPT 在开源模型中取得最佳平均得分
-- ✅ 在缺陷定位（VQA）任务上显著优于其他模型
-- ✅ 三阶段课程学习有效提升模型性能
-
-详见完整实验结果：[docs/EXPERIMENTS.md](docs/EXPERIMENTS.md)
-
----
-
-## 📚 数据集
-
-详见 [data/DATASETS.md](data/DATASETS.md)，包含：
-
-### 主要数据集
-
-| 数据集 | PCB 类型 | 成像模态 | 图像数 |
-|--------|---------|---------|--------|
-| HRIPCB | BPCB | RGB | 1386 |
-| DeepPCB | BPCB | Line-Scan | 3000 |
-| PCB-AoI | PCBA | AOI | 1211 |
-| PCBA-DET | PCBA | Real | 4601 |
-| Solder Joint Dataset | PCBA | Real | 3390 |
-| Dataset-PCB | PCBA | Real | 3196 |
-| DsPCBSD+ | BPCB | AOI | 10259 |
-| VisA (PCB) | PCBA | RGB | 4416 |
-| PCB-Bank | PCBA | RGB | 2333 |
-| PCB-Resistor-Defect-Dataset | PCBA | RGB | 261399 |
-| PCB Datasets-main | PCBA | AOI | 4748 |
-| PCB AD | PCBA | RGB | 690 |
-| Multiple Datasets on PCB Defects | BPCB | AOI | 18493 |
-| MPI-PCB | PCBA | Real | 1797 |
-| Micro-PCB Images | PCBA | RGB | 8125 |
-| FPIC | PCBA | AOI | 6260 |
-| PCB oriented detection | PCBA | AoI | 190 |
-| PCB Component Detection | PCBA | Real | 1410 |
-| PCB-Components-1495 | PCBA | Real | 830 |
-
-**UniPCB 统计：**
-- 6581 张图像
-- 23,359 个双语 QA 对
-- 三种渐进式标注场景
+**Total**: 22 public datasets, ~85K+ images
 
 ---
 
-## 🔗 基准测试详情
+## Experimental Results
 
-### 三种评估场景
+### Overall Performance on UniPCB Benchmark
 
-| 场景 | 说明 | 占比 |
-|------|------|------|
-| P1（完全标注） | 提供类别和边界框标注 | 43% |
-| P2（弱标注） | 仅提供边界框标注 | 29% |
-| P3（无标注） | 无标注，需模型检测 | 28% |
+| Model | Params | CoT Acc | F1 | OQA Score | Average | VQA |
+|-------|-------|----------|----|----------|--------|-----|
+| GPT-5-Main | - | 73.1 | 66.1 | 77.0 | 71.2 |
+| Gemini-2.5-Pro | - | 76.4 | 68.5 | 71.9 | 69.3 |
+| EMIT-8B | 36.4 | 48.5 | 69.3 | 60.0 |
+| IAD-R1-7B | 58.9 | 50.1 | 56.9 | 54.7 |
+| AnomalyGPT-7B | 12.9 | 12.3 | 37.4 | 50.1 |
+| DeepSeek2VL-16B | 17.5 | 24.4 | 57.8 | 47.3 |
+| InternVL2.5-8B | 56.7 | 39.0 | 66.0 | 64.0 |
+| InternVL3-8B | 52.9 | 47.2 | 64.7 | 56.0 |
+| InternVL3.5-8B | 57.5 | 43.5 | 65.5 | 53.7 |
+| LLaVA-OV-8B | 61.6 | 55.4 | 73.2 | 56.7 |
+| MiMo-V2-Flash-15B | 40.0 | 47.7 | 42.0 | 64.0 |
+| MiniCPM-V4.5-8B | 53.9 | 54.0 | 57.7 | 66.3 |
+| Qwen2.5-VL-7B | 53.2 | 44.2 | 66.7 | 50.4 |
+| Qwen3-VL-Instruct-8B | 61.5 | 48.7 | 64.8 | 66.2 |
+| Qwen3-VL-Think-8B | 65.6 | 54.6 | 64.9 | 65.5 |
+| **PCB-GPT (Ours)** | 7B | **72.5** | **66.4** | **73.4** | **69.0** |
 
-### 14 种任务类型
+### Key Findings
 
-- **缺陷任务**：缺陷检测、缺陷分类、缺陷计数、缺陷定位、缺陷坐标、缺陷分析、缺陷详细描述
-- **元件任务**：元件分析、元件描述、元件计数、元件类型、元件定位、元件坐标
-- **描述任务**：目标描述（Object Describe）
+- ✅ **PCB-GPT achieves the best average score** among open-source models
+- ✅ **Significant improvement in defect localization** (VQA task)
+- ✅ **Three-stage curriculum learning effectively boosts performance**
+- 📊 CoT supervision enhances structured output capabilities
+
+### Cross-Dataset Generalization (PCB-Bank)
+
+| Model | Setting | Accuracy | Precision | Recall | F1 |
+|-------|---------|----------|----------|----------|------|
+| GPT-5-Main | 0-shot | 65.1 | 39.9 | 28.2 | 33.0 |
+| AnomalyGPT | 0-shot | 70.7 | 46.0 | 44.6 | 45.3 |
+| **PCB-GPT (Ours)** | 0-shot | **63.8** | 40.6 | **72.1** | **52.1** |
+| GPT-5-Main | 1-shot | 48.3 | 35.6 | 85.7 | 50.3 |
+| AnomalyGPT | 1-shot | 42.3 | 30.6 | 88.2 | 45.5 |
+| **PCB-GPT (Ours)** | 1-shot | **77.8** | 50.6 | **76.0** | **61.0** |
+
+### Ablation Study on Qwen2.5-VL-7B
+
+| Base Model | CoT | Acc | F1 | OQA Score | Average |
+|-------------|-----|----|----|----------|--------|
+| BaseData | ✗ | 48.7 | 22.3 | 59.9 | 43.6 |
+| +Stage1 | ✗ | 60.1 | 30.0 | 66.1 | 52.1 |
+| +Stage2 | ✗ | 57.1 | 22.7 | 69.3 | 49.7 |
+| +Stage1,2 | ✗ | 57.1 | 15.2 | 62.8 | 45.1 |
+| +Stage1,2,3 | ✗ | 65.6 | 27.3 | 69.8 | 54.2 |
+| +Stage1,2 | ✓ | **63.3** | **38.9** | **67.0** | **56.4** |
+| +Stage1,2,3 | ✓ | **69.5** | **51.1** | **69.0** | **63.2** |
 
 ---
 
-## 📋 使用方法
+## Methodology
 
-### 数据格式
+### Three-Stage Curriculum Learning
 
-详见 [docs/DATA_FORMAT.md](docs/DATA_FORMAT.md)，包含：
-- 任务类型定义
-- 输出格式规范
-- 标注标准
+1. **Stage 1: Concept Alignment**
+   - Align vision encoder with PCB domain semantics
+   - Use caption-style concept data
 
-### 训练流程
+2. **Stage 2: Instruction Tuning**
+   - Supervised fine-tuning on multimodal QA data
+   - Enforce structured output format
 
-**三阶段课程学习：**
+3. **Stage 3: Reinforcement Learning**
+   - Apply GRPO/RL for further optimization
+   - Use verifiable tasks with reward signals
 
-1. **阶段 1：概念对齐**
-   - 对齐视觉编码器与 PCB 领域语义
-   - 使用图像描述数据
-   
-2. **阶段 2：指令微调**
-   - 在多模态 QA 数据上进行监督训练
-   - 强制结构化输出格式
-   
-3. **阶段 3：强化学习**
-   - 使用 GRPO/RL 进一步优化性能
-   - 基于可验证任务的奖励信号
+### Evaluation Scenarios
+
+- **P1 (Fully Labeled)**: Category + bounding box annotations (43%)
+- **P2 (Weakly Labeled)**: Box-only annotations (29%)
+- **P3 (Unlabeled)**: No annotations (28%)
 
 ---
 
-## 📚 论文
+## Citation
 
-### 引用
-
-如果您在研究中使用了 UniPCB，请引用我们的论文：
+If you use UniPCB in your research, please cite our paper:
 
 ```bibtex
 @article{sun2026unipcb,
@@ -166,50 +165,39 @@ UniPCB/
 }
 ```
 
-### 论文链接
+---
 
-- **arXiv**: https://arxiv.org/abs/2601.19222
-- **DOI**: https://doi.org/10.48550/arXiv.2601.19222
+## Project Structure
+
+```
+UniPCB/
+├── README.md              # This file
+├── LICENSE                # MIT License
+└── assets/               # Figures and visualizations
+```
 
 ---
 
-## 🔬 未来发布计划
+## Future Release
 
-- [x] 基准测试代码
-- [x] 数据集下载
-- [x] 预训练模型权重
-- [x] 完整训练脚本
-- [x] 可视化图片
+The following will be released after paper acceptance:
 
-**注：** 上述内容将在论文正式中稿后发布。
-
----
-
-## 🤝 贡献
-
-我们欢迎各种形式的贡献！详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-- 🐛 报告问题
-- 💡 提交代码
-- 📝 改进文档
-- 🔍 建议和反馈
+- [ ] Benchmark evaluation code
+- [ ] Dataset download scripts
+- [ ] Pre-trained model weights
+- [ ] Complete training scripts
+- [ ] Visualization figures
 
 ---
 
-## 📜 许可证
+## Contact
 
-本项目采用 [MIT 许可证](LICENSE)。
-
----
-
-## 📧 联系方式
-
-- 📄 Email: sfx076@163.com
-- 🐛 GitHub Issues: https://github.com/asfx0412/UniPCB/issues
-- 📄 论文: https://arxiv.org/abs/2601.19222
+- **Email**: sfx076@163.com
+- **GitHub Issues**: https://github.com/asfx0412/UniPCB/issues
+- **Paper**: https://arxiv.org/abs/2601.19222
 
 ---
 
-<p align="center">
-  <i>⭐ 如果这个项目对你有帮助，请给一个 Star！</i>
-</p>
+## License
+
+This project is licensed under the [MIT License](LICENSE).
