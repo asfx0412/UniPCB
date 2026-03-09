@@ -23,9 +23,10 @@
 ## 🚀 主要特性
 
 - **统一基准**：标准化来自不同来源的 PCB 检测数据
-- **渐进式课程学习**：模仿人类专家学习过程的训练策略
+- **渐进式课程学习**：三阶段训练策略，模仿人类专家学习过程
 - **多任务评估**：支持缺陷检测、定位、分析等多种任务
-- **开放接口**：易于扩展和自定义
+- **统一推理接口**：支持多种 MLLM 模型的标准化推理
+- **强化学习优化**：支持 PPO/GRPO 等算法
 
 ## 📦 安装
 
@@ -86,7 +87,43 @@ metrics = evaluator.evaluate(
 
 更多示例请查看 [examples/](examples/) 目录。
 
-## 📊 基准测试
+---
+
+## 🏋️ 训练模型
+
+### 三阶段训练流程
+
+**阶段 1：基础元件识别**
+```bash
+bash scripts/train_stage1.sh
+```
+
+**阶段 2：缺陷检测**
+```bash
+bash scripts/train_stage2.sh
+```
+
+**阶段 3：强化学习**
+```bash
+bash scripts/train_stage3.sh
+```
+
+详细训练指南请查看 [docs/TRAINING.md](docs/TRAINING.md)。
+
+### 模型合并与推理
+
+```bash
+# 合并 LoRA 权重
+bash scripts/infer_merge.sh
+
+# 运行推理
+python scripts/infer_unified.py \
+    --model qwen \
+    --data path/to/test_data.json \
+    --output results/predictions.json
+```
+
+---
 
 UniPCB 包含三个核心评估场景：
 
@@ -110,12 +147,21 @@ UniPCB/
 │       ├── data/          # 数据加载与处理
 │       ├── eval/          # 评估脚本
 │       └── utils/         # 工具函数
+├── scripts/               # 训练和推理脚本
+│   ├── train_stage1.sh   # 第一阶段训练（基础元件识别）
+│   ├── train_stage2.sh   # 第二阶段训练（缺陷检测）
+│   ├── train_stage3.sh   # 第三阶段训练（强化学习）
+│   ├── infer_merge.sh    # 模型合并和推理
+│   └── infer_unified.py  # 统一推理接口
+│       └── train_stage2/  # 第三阶段辅助脚本
+│           └── reward_function.py  # 奖励函数
 ├── examples/              # 使用示例
 ├── docs/                  # 详细文档
+│   ├── TRAINING.md        # 训练指南
+│   └── DATA_FORMAT.md     # 数据格式说明
 ├── configs/               # 配置文件
 ├── data/                  # 数据目录
-│   ├── README.md          # 数据说明（待补充）
-│   └── models/            # 模型权重（待补充）
+│   └── README.md          # 数据说明（待补充）
 └── tests/                 # 单元测试
 ```
 
