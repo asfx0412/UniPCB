@@ -155,10 +155,11 @@ Below is the full comprehensive catalog of PCB datasets surveyed for UniPCB cons
 
 ## Citation
 ```
-@inproceedings{unipcb2026,
-  title={UniPCB: A Unified Vision-Language Benchmark for PCB Quality Inspection},
-  author={},
-  booktitle={IJCAI},
+@article{sun2026unipcb,
+  title={UniPCB: A Unified Vision-Language Benchmark for Open-Ended PCB Quality Inspection},
+  author={Sun, Fuxiang and Jiang, Xi and Wu, Jiansheng and Zhang, Haigang and Zheng, Feng},
+  journal={arXiv preprint arXiv:2601.19222},
+  booktitle={Proceedings of the 35th International Joint Conference on Artificial Intelligence (IJCAI)},
   year={2026}
 }
 ```
