@@ -2,7 +2,7 @@
 
 [![Industry_Inspection](https://img.shields.io/badge/Task-PCB_Quality_Inspection-white)](https://github.com/M-3LAB/awesome-industrial-anomaly-detection)
 [![UniPCB](https://img.shields.io/badge/Dataset-UniPCB-blue)]()
-[![IJCAI 2026](https://img.shields.io/badge/Paper-IJCAI%202026-red)]()
+[![arXiv Preprint](https://img.shields.io/badge/Paper-arXiv%3A2601.19222-red)](https://arxiv.org/abs/2601.19222)
 [![PCB-GPT](https://img.shields.io/badge/Model-PCB--GPT-green)]()
 
 ![UniPCB Teaser](assets/teaser.png)
@@ -15,7 +15,7 @@
 
 ## 📜 News
 - **[2026-03-10]** Repository and preprint paper released
-- **[2026-01-15]** UniPCB paper accepted by IJCAI 2026
+- **[2026-01-25]** UniPCB preprint published on arXiv
 - **[2025-12-20]** PCB-GPT achieves new SOTA on all PCB inspection benchmarks
 
 ## Overview
@@ -159,7 +159,6 @@ Below is the full comprehensive catalog of PCB datasets surveyed for UniPCB cons
   title={UniPCB: A Unified Vision-Language Benchmark for Open-Ended PCB Quality Inspection},
   author={Sun, Fuxiang and Jiang, Xi and Wu, Jiansheng and Zhang, Haigang and Zheng, Feng},
   journal={arXiv preprint arXiv:2601.19222},
-  booktitle={Proceedings of the 35th International Joint Conference on Artificial Intelligence (IJCAI)},
   year={2026}
 }
 ```
