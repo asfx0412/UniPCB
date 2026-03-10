@@ -5,7 +5,7 @@
 [![IJCAI 2026](https://img.shields.io/badge/Paper-IJCAI%202026-red)]()
 [![PCB-GPT](https://img.shields.io/badge/Model-PCB--GPT-green)]()
 
-![UniPCB Teaser](assets/teaser.pdf)
+![UniPCB Teaser](assets/teaser.png)
 
 ## 💡 Highlights
 - First unified vision-language benchmark covering both BPCB and PCBA inspection levels
@@ -24,7 +24,7 @@ UniPCB is the first unified vision-language benchmark tailored for open-ended PC
 We also propose **PCB-GPT**, a specialized vision-language assistant for PCB inspection trained with a three-stage curriculum learning strategy, which achieves state-of-the-art performance on fine-grained defect localization and interpretable reasoning tasks.
 
 ## Data Construction Pipeline
-![Data Generation Pipeline](assets/data_pipeline.pdf)
+![Data Generation Pipeline](assets/data_pipeline.png)
 
 Our systematic data construction pipeline unifies:
 1. Multi-source data collection across different imaging modalities
@@ -32,8 +32,10 @@ Our systematic data construction pipeline unifies:
 3. Unified taxonomy with 7 defect categories and 6 component functional domains
 4. Dual-track quality control for both training set and benchmark generation
 
-## Dataset Statistics
-![Category Distribution](assets/category_distribution.pdf)
+## Dataset Composition
+![Dataset Sunburst Distribution](assets/sunburst.png)
+
+Rings from inner to outer represent imaging modalities (RGB/AOI/Real), data construction stages, and task families with fine-grained sample counts.
 
 The UniPCB benchmark contains:
 - 6k high-quality PCB images
@@ -79,13 +81,36 @@ wget <model-url> -O models/pcb_gpt.pth
 python evaluation/evaluate.py --model models/pcb_gpt.pth --scenario all
 ```
 
-## Performance
-| Model | Overall Accuracy | Defect Localization F1 | Reasoning Score |
-|-------|------------------|-------------------------|-----------------|
-| Qwen-VL-72B | 42.3% | 28.7% | 39.2% |
-| InternVL-3.5-78B | 45.1% | 31.2% | 41.5% |
-| LLaVA-Next-70B | 40.9% | 26.4% | 37.8% |
-| **PCB-GPT (Ours)** | **68.7%** | **67.3%** | **70.2%** |
+## 📊 Main Experiment Results
+Quantitative comparison on the UniPCB Benchmark across different model categories. **Bold** = best performance, <u>Underline</u> = second-best performance within each category. P1/P2/P3 = fully/weakly/unlabeled settings.
+
+| Model Category | Model | Size | P1 Acc | P2 Acc | P3 Acc | Localization F1 | Overall Score |
+|----------------|-------|------|--------|--------|--------|------------------|---------------|
+| **Commercial MLLM** | GPT-4o | - | 64.2% | 58.7% | 61.0% | 31.2% | 56.2% |
+| | Gemini-1.5 Pro | - | 62.7% | 55.4% | 57.8% | 28.9% | 52.8% |
+| | Doubao-VL 4.0 | - | <u>65.6%</u> | <u>60.1%</u> | <u>62.3%</u> | <u>32.8%</u> | <u>57.4%</u> |
+| | Qwen-VL-Max | - | **68.1%** | **62.3%** | **65.7%** | **34.1%** | **60.5%** |
+| **IAD Models** | AnomalyGPT | 7B | 22.1% | 18.7% | 20.4% | 12.3% | 21.2% |
+| | IAD-VL | 7B | 28.7% | 24.5% | 26.1% | 15.7% | 26.8% |
+| **Open Source MLLM** | Qwen2.5-VL | 7B | 53.2% | 44.2% | 66.7% | 22.3% | 55.0% |
+| | Qwen3-VL-Instruct | 8B | 61.5% | 48.7% | 64.8% | 22.2% | <u>58.6%</u> |
+| | PCB-GPT (Ours) | 7B | **72.5%** | **66.4%** | **73.4%** | **51.1%** | **67.3%** |
+
+## 📚 PCB Dataset Catalog
+Below is the comprehensive catalog of PCB datasets surveyed for UniPCB construction (similar to the SOTA methods list in awesome-industrial-anomaly-detection):
+
+| Dataset | PCB Type | Modality | Target | # Categories | # Images | Link |
+|---------|----------|----------|--------|--------------|----------|------|
+| HRIPCB | BPCB | RGB | Defect | 6 | 1386 | [pkusz.edu.cn](https://robotics.pkusz.edu.cn/resources/dataset/) |
+| HRIPCB-Augmented | BPCB | RGB | Defect | 6 | 10668 | [GitHub](https://github.com/Ixiaohuihuihui/Tiny-Defect-Detection-for-PCB) |
+| DeepPCB | BPCB | Line-Scan | Defect | 6 | 3000 | [GitHub](https://github.com/tangsanli5201/DeepPCB) |
+| PCB-AoI | PCBA | AOI | Defect | 1 | 1211 | [Kaggle](https://www.kaggle.com/datasets/kubeedgeianvs/pcb-aoi/data) |
+| PCBA-DET | PCBA | Real | Defect | 8 | 4601 | [GitHub](https://github.com/ismh16/PCBA-Dataset?tab=readme-ov-file) |
+| FICS | PCBA | RGB | Mix | 31 | 9912 | [trust-hub.org](https://trust-hub.org/#/data/fics-pcb) |
+| VisA (PCB) | PCBA | RGB | Mix | 10 | 4416 | [GitHub](https://github.com/amazon-science/spot-diff) |
+| PCB-Bank | PCBA | RGB | Mix | 11 | 2333 | [GitHub](https://github.com/SSRheart/PCB-Bank?tab=readme-ov-file) |
+| Micro-PCB Images | PCBA | RGB | Component | 13 | 8125 | [Kaggle](https://www.kaggle.com/datasets/frettapper/micropcb-images/data) |
+| *[Full list in Appendix]* | - | - | - | - | - | [Appendix](https://arxiv.org/abs/xxxx.xxxxx) |
 
 ## Citation
 ```
